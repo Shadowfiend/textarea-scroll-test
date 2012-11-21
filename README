@@ -1,0 +1,3 @@
+Textarea scroll test. We highlight the textarea contents facebook-style, but we
+do it on a single line by preventing word wrap and syncing to scrollLeft. It's
+a tad jumpy, some work on edit distances and updates will probably help.
