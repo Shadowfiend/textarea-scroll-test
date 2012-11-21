@@ -1,0 +1,58 @@
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('textarea').keyup(function() {
+        var $this = $(this);
+        var text = $this.val();
+        var existing = $('#content').text();
+        var parts = text.split(/(\s+)/);
+
+        if (text != existing) {
+          var content =
+            $.map(parts, function(part) {
+              if (part.match(/^\s+$/))
+                return part;
+              else if (part == '')
+                return '';
+              else
+                return "<span class='boom'>" + part.replace(/^\s+|\s+$/g, "") + "</span>";
+            }).join("")
+          console.log(parts, content);
+
+          $('#content').html(content);
+        }
+
+        $('#content').scrollLeft($this.scrollLeft());
+    });
+  });
+</script>
+<style type="text/css">
+#content, textarea {
+  font-family: 'Lucida Grande', sans-serif;
+  font-size: 12pt;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  padding: 0;
+  margin: 2px;
+
+  overflow: hidden;
+  white-space: pre;
+
+  width: 300px;
+
+  border: none;
+}
+
+textarea {
+  background: transparent;
+}
+#content span {
+  background-color: rgba(0,10,100,0.2);
+  color: rgba(0,0,0,0);
+}
+</style>
+<div id="content"></div>
+<textarea style="white-space: nowrap; overflow: hidden;"></textarea>
