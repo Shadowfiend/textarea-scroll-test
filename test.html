@@ -1,3 +1,4 @@
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -22,7 +23,7 @@
           $('#content').html(content);
         }
 
-        $('#content').scrollLeft($this.scrollLeft());
+        $('#content').css({ left: -$this.scrollLeft() });
     });
   });
 </script>
@@ -32,13 +33,12 @@
   font-size: 12pt;
 
   position: absolute;
-  top: 0;
+  top: 2em;
   left: 0;
 
   padding: 0;
   margin: 2px;
 
-  overflow: hidden;
   white-space: pre;
 
   width: 300px;
@@ -48,11 +48,46 @@
 
 textarea {
   background: transparent;
+  overflow: hidden;
+}
+#content {
+  overflow-y: visible;
 }
 #content span {
   background-color: rgba(0,10,100,0.2);
   color: rgba(0,0,0,0);
+  position: relative;
+}
+
+#content .boom:before {
+  content: '×';
+  font-weight: bold;
+  position: absolute;
+  top: -1.15em;
+  width: 100%;
+  color: red;
+  background: rgba(0,10,100,0.2);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+
+  height: 200px;
+}
+
+#content, textarea {
+  height: 22px;
+}
+
+.wrapper, #content, textarea {
+  width: 200px;
 }
 </style>
-<div id="content"></div>
-<textarea style="white-space: nowrap; overflow: hidden;"></textarea>
+<div class="wrapper">
+  <div id="content"></div>
+  <textarea style="white-space: nowrap; overflow: hidden;"></textarea>
+</div>
